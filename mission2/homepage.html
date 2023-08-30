@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <title>Mission 2 : Vanilla Javascript</title>
+</head>
+<body>
+    <div class="container-fluid pt-3">
+        <div class="row">
+          <div class="col">
+            <h2>Products</h2>
+            <div class="row">
+                <div class="col">
+                    <div class="card text-center m-3" style="width: 14rem;">
+                        <img class="card-img-top" src="img/SHREK.jpeg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">Barang 1</h5>
+                          <p class="card-text">Rp. 30.000</p>
+                          <a onclick="dec('input1')" href="#" id="btnpls" class="btn btn-primary"> - </a>
+                          <input id="input1" type="number" min="0" max="100" value="0">
+                          <a onclick="inc('input1')" href="#" class="btn btn-primary"> + </a>
+                        </div>
+                        <div class="card-footer">
+                            <a onclick="tambahKeranjang('Barang 1','input1','30000')" href="#" class="btn btn-success">Add Product</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center m-3" style="width: 14rem;">
+                        <img class="card-img-top" src="img/SHREK.jpeg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">Barang 2</h5>
+                          <p class="card-text">Rp. 45.000</p>
+                          <a onclick="dec('input2')" href="#" id="btnpls" class="btn btn-primary"> - </a>
+                          <input id="input2" type="number" min="0" max="100" size="4" value="0">
+                          <a onclick="inc('input2')" href="#" class="btn btn-primary"> + </a>
+                        </div>
+                        <div class="card-footer">
+                            <a onclick="tambahKeranjang('Barang 2','input2','45000')" href="#" class="btn btn-success">Add Product</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card text-center m-3" style="width: 14rem;">
+                        <img class="card-img-top" src="img/SHREK.jpeg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">Barang 3</h5>
+                          <p class="card-text">Rp. 25.000</p>
+                          <a onclick="dec('input3')" href="#" id="btnpls" class="btn btn-primary"> - </a>
+                          <input id="input3" type="number" min="0" max="100" size="4" value="0">
+                          <a onclick="inc('input3')" href="#" class="btn btn-primary"> + </a>
+                        </div>
+                        <div class="card-footer">
+                            <a onclick="tambahKeranjang('Barang 3','input3','25000')" href="#" class="btn btn-success">Add Product</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card text-center m-3" style="width: 14rem;">
+                        <img class="card-img-top" src="img/SHREK.jpeg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">Barang 4</h5>
+                          <p class="card-text">Rp. 105.000</p>
+                          <a onclick="dec('input4')" href="#" id="btnpls" class="btn btn-primary"> - </a>
+                          <input id="input4" type="number" min="0" max="100" size="4" value="0">
+                          <a onclick="inc('input4')" href="#" class="btn btn-primary"> + </a>
+                        </div>
+                        <div class="card-footer">
+                            <a onclick="tambahKeranjang('Barang 4','input4','105000')" href="#" class="btn btn-success">Add Product</a>
+                        </div>
+                    </div>
+                </div>                
+
+            </div>
+          </div>
+
+          <div class="col">
+            <h2>My Cart</h2>
+            <ul id="barang-keranjang" class="list-group"></ul>
+            <!-- <p id="name"></p> -->
+            <br>
+            Total Pembelian <b><p id="totHarga"></p></b> 
+            <br>
+            Pajak 11% <b><p id="Pajak11"></p></b> 
+            <br>
+            Total Bayar <b><p id="finHarga"></p></b>
+            <br>
+            <button onclick="window.print()" class="fa fa-print btn btn-primary"></button>
+            <!-- <p id="name"></p> x <p id="quant1"></p> -->
+          </div>
+          
+
+        </div>
+      </div>  
+
+    <script>
+
+        // var value = parseInt(document.getElementById(id).value, 10);
+
+        var totalHarga = 0;
+
+        const barangKeranjang = document.getElementById("barang-keranjang");
+        var totalHarga3 = 0;
+        var pajak11 = 0;
+        var finalHarga = 0;
+        // let namaProd1 = ""; 
+        
+        function tambahKeranjang(namaProd, IDs, harga){
+            const jml = document.getElementById(IDs).value;
+
+
+
+            // namaProd1 = namaProd;
+
+            // let hasil = namaProd.localeCompare(namaProd1);
+
+            // console.log(hasil);
+
+
+            const barKeranjang = document.createElement("li");
+            barKeranjang.classList.add('list-group-item');
+
+            var mult = 0;
+
+            mult = `${harga}` * `${jml}`;
+
+            const formattedMult = mult.toLocaleString("en-US");
+
+            barKeranjang.innerHTML = `${namaProd} : ` + `<br> ${harga} x ${jml}: ` + `<strong>Rp. `+formattedMult+`</strong>`;
+            barangKeranjang.appendChild(barKeranjang);
+
+            var totalHarga2 = `${harga}` * `${jml}`;
+
+            totalHarga3 = totalHarga3 + totalHarga2;
+
+            const formattedNumberTotalHarga = totalHarga3.toLocaleString("en-US");
+        
+            document.getElementById("totHarga").innerHTML = `Rp. `+ formattedNumberTotalHarga;
+
+            pajak11 = totalHarga3 * (11/100);
+
+            const formattedNumberPajak11 = pajak11.toLocaleString("en-US");
+
+            document.getElementById("Pajak11").innerHTML = `Rp. `+ formattedNumberPajak11;
+
+            finalHarga = pajak11 + totalHarga3;
+
+            const formattedNumberFinalHarga = finalHarga.toLocaleString("en-US");
+
+            // console.log(formattedNumber);
+
+            document.getElementById("finHarga").innerHTML = `Rp. `+ formattedNumberFinalHarga;
+
+            // return totalHarga3;
+
+        }
+        
+        function dec(id){
+
+            // value = isNaN(value) ? 0 : value;
+            // value--;
+            if(id < 0){
+                document.getElementById(id).value = 0;
+            }
+            else{
+                document.getElementById(id).stepDown();
+            }
+        }
+
+        function inc(id){
+            // value = isNaN(value) ? 0 : value;
+            // value++;
+
+            document.getElementById(id).stepUp(); 
+
+        }
+
+        function addTransaction1(){
+            // totalHarga = 30000;
+        }  
+
+    </script>      
+
+</body>
+</html>
